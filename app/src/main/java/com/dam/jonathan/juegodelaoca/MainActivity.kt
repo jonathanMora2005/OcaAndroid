@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var P1: TextView
     private lateinit var P2: TextView
     private lateinit var TC: TextView
+    private lateinit var DT: TextView
     private lateinit var M1: ConstraintLayout
     private lateinit var M2: ConstraintLayout
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         M1 = findViewById(R.id.m1)
         M2 = findViewById(R.id.m2)
         TC = findViewById(R.id.tc)
+        DT = findViewById(R.id.dt)
 
         TC.setTextColor(Color.parseColor("#FFFFFF"))
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun Tira(view: View) {
         val roll = oca.tirada()
+        DT.text = roll.toString()
         if (oca.nextPlayer() == 1) {
             P1.text = (P1.text.toString().toInt() + roll).toString()
             if (!oca.casellaEspacial(P1.text.toString().toInt())){
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 oca.nextPlayer()
             }
             if (oca.guanyador(P1.text.toString().toInt())){
-                TC.setTextColor(Color.parseColor("#f9ff33"))
+                TC.setTextColor(Color.parseColor("#3346ff"))
                 TC.text = "el jugador " + N1.text + " a ganador"
                 M1.setBackgroundColor(Color.parseColor("#FFFFFF"))
                 M2.setBackgroundColor(Color.parseColor("#FFFFFF"))
@@ -84,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun Comensa(view: View) {
-        if (N1.text != null && N2.text != null) {
+        if (N1.text == "" || N2.text == "") {
             oca = Oca()
             M1.setBackgroundColor(Color.parseColor("#FF5733"))
             M2.setBackgroundColor(Color.parseColor("#FFFFFF"))
